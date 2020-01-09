@@ -77,13 +77,14 @@ class LoginController extends Controller
         return User::create([
             'name' => $user->name,
             'email' => $user->email,
-            'provider' => "GOOGLE",
+            'provider' => 'GOOGLE',
             'provider_id' => $user->id,
             'avatar' => $user->avatar,
         ]);
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return redirect($this->redirectTo);
     }

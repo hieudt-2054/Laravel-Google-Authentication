@@ -14,7 +14,7 @@ class ProfileController extends Controller
      */
     public function index(Request $request)
     {
-        return view('backend.profile');   
+        return view('backend.profile');
     }
 
     /**
@@ -42,10 +42,10 @@ class ProfileController extends Controller
             $this->validate(
                 $request,
                 [
-                    'name' => 'required'
+                    'name' => 'required',
                 ],
                 [
-                    'name.required' => 'Name required !'
+                    'name.required' => 'Name required !',
                 ]
             );
         }
