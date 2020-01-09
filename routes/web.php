@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Change url to : /login';
 });
 
 Route::get('login', 'Auth\LoginController@index')->name('login');
