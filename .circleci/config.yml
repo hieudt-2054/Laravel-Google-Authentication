@@ -19,3 +19,38 @@ jobs:
 
       # run test
       - run: phpcs --standard=Framgia app
+      - run:
+          name: Sending notification
+          command: |
+            if [[ true ]];  then
+              curl -X POST -H "X-ChatWorkToken: $CHATWORK_TOKEN" -d \
+                "body=
+                [toall]
+                [info]
+                - Repository name: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
+                - Author: $CIRCLE_USERNAME
+                - Branch: $CIRCLE_BRANCH
+                - Commit/pull request link: https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/commit/$CIRCLE_SHA1
+                - Build link: https://circleci.com/gh/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM
+                - Count Build: $CIRCLE_BUILD_NUM
+                - $CIRCLE_WORKFLOW_ID
+                - $CI
+                - $CI_PULL_REQUEST
+                - $CI_PULL_REQUESTS
+                - $CIRCLE_COMPARE_URL
+                - $CIRCLE_INTERNAL_TASK_DATA
+                - $CIRCLE_JOB
+                - $CIRCLE_NODE_INDEX
+                - $CIRCLE_NODE_TOTAL
+                - $CIRCLE_PR_NUMBER
+                - $CIRCLE_PREVIOUS_BUILD_NUM
+                - $CIRCLE_PULL_REQUEST
+                - $CIRCLE_SHA1
+                - $CIRCLE_TAG
+                - $CIRCLE_WORKING_DIRECTORY
+                - $CIRCLECI
+                - $HOME
+                [/info]
+                " \
+                "https://api.chatwork.com/v2/rooms/$CHATWORK_ROOM/messages"
+            fi
