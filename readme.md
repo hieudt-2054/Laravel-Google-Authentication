@@ -7,4 +7,5 @@
 - Login with Google use Laravel Package
 - CRUD with Ajax
 - Integrated Cirlce CI
+- Integrated Github Actions
 
