@@ -1,0 +1,10 @@
+name: WIP
+on: [pull_request]
+
+jobs:
+  wip:
+    runs-on: ubuntu-latest
+    name: An example WIP
+    steps:
+      - name: WIP Test
+        uses: wip/action@master
